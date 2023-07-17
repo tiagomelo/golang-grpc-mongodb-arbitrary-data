@@ -1,0 +1,51 @@
+// Copyright (c) 2023 Tiago Melo. All rights reserved.
+// Use of this source code is governed by the MIT License that can be found in
+// the LICENSE file.
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+// Package productcatalog defines the service and message types for managing products.
+package productcatalog;
+option go_package = "github.com/tiagomelo/golang-grpc-mongodb-arbitrary-data/api/proto/gen/productcatalog";
+
+// Product is a data structure that represents an item for sale.
+message Product {
+    string uuid = 1;  // Unique identifier for the product.
+    string name = 2;  // The name of the product.
+    string description = 3;  // A detailed description of the product.
+    float price = 4;  // The price of the product.
+    map<string, google.protobuf.Value> attributes = 5;
+}
+
+// ProductCatalogService defines the methods for managing products.
+service ProductCatalogService {
+    rpc CreateProduct (Product) returns (Product) {}  // Creates a new product.
+    rpc GetProduct (GetProductRequest) returns (Product) {}  // Retrieves a specific product.
+    rpc UpdateProduct (Product) returns (Product) {}  // Updates a specific product.
+    rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse) {}  // Deletes a specific product.
+    rpc ListProducts (ListProductsRequest) returns (ListProductsResponse) {}  // Lists all products.
+}
+
+// GetProductRequest is the request structure for retrieving a specific product.
+message GetProductRequest {
+    string uuid = 1;  // Unique identifier of the product to retrieve.
+}
+
+// DeleteProductRequest is the request structure for deleting a specific product.
+message DeleteProductRequest {
+    string uuid = 1;  // Unique identifier of the product to delete.
+}
+
+// DeleteProductResponse is the response structure for the delete product operation.
+message DeleteProductResponse {
+    string result = 1;  // Result of the deletion operation.
+}
+
+// ListProductsRequest is the request structure for listing all products.
+message ListProductsRequest {}
+
+// ListProductsResponse is the response structure for the list products operation. 
+message ListProductsResponse {
+    repeated Product products = 1;  // A list of products.
+}
