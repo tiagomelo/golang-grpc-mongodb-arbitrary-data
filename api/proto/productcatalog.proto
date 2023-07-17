@@ -15,7 +15,7 @@ message Product {
     string name = 2;  // The name of the product.
     string description = 3;  // A detailed description of the product.
     float price = 4;  // The price of the product.
-    map<string, google.protobuf.Value> attributes = 5;
+    map<string, google.protobuf.Value> attributes = 5; // The product attributes.
 }
 
 // ProductCatalogService defines the methods for managing products.

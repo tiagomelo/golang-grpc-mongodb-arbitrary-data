@@ -21,6 +21,11 @@ import (
 
 const collectionName = "products"
 
+// Cursor is an interface that defines the methods necessary for iterating
+// over query results in a data layer.
+// This interface is particularly useful for simplifying unit tests
+// by allowing the implementation of mock cursors that can be used
+// for testing data retrieval and manipulation operations.
 type Cursor interface {
 	Decode(interface{}) error
 	Err() error
